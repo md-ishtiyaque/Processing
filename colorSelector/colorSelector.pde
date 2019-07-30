@@ -1,32 +1,58 @@
 int Hue;
 int Saturation;
 int Brightness;
-
+int factor = height;
 
 
 void setup(){
   background(0);
-  size(600, 600);
-  colorMode(HSB, 400, 600, 600);
-  for(Hue=0;Hue<400;Hue++){
-    for(Saturation=0;Saturation<600;Saturation++){
-      stroke(Hue, Saturation, 600);
-      point(Hue, Saturation);
+  fullScreen();
+  orientation(LANDSCAPE);
+  colorMode(HSB, height, height, height);
+  noLoop();
+}
+
+
+void draw(){
+   displayHSPicker();
+}
+
+void mousePressed(){
+  if(mouseX < height){
+    displayBPicker();
+  }
+   else if(mouseX < height + ( width -  height) / 2){
+     displayPickedColour();
+   }
+   
+}
+
+
+void displayHSPicker(){
+  noStroke();
+  for(int Hue = 0; Hue < height; Hue += factor){
+    for(int Saturation = 0; Saturation < height; Saturation += factor){
+      stroke(Hue, Saturation, height);
+      fill(Hue, Saturation, height);
+      rect(Hue, Saturation, factor, factor);
     }
   }
 }
 
 
-void draw(){
- 
+void displayBPicker(){
+  Hue = mouseX;
+  Saturation = mouseY;
+  for(int Brightness = 0; Brightness < height; Brightness++){
+    stroke(Hue, Saturation, Brightness);
+    line(height , Brightness,  height + ( width -  height) / 2, Brightness);
+   }
 }
 
-void mousePressed(){
-  if(mouseX<400)
-    Hue = mouseX;
-  Saturation = mouseY;
-  for(Brightness = 0; Brightness< 600; Brightness++){
-    stroke(Hue, Saturation, Brightness);
-    line(450, Brightness, 550, Brightness);
-   }
+
+void displayPickedColour(){
+   Brightness = mouseY;
+   noStroke();
+   fill(Hue, Saturation, Brightness);
+   rect(height + ( width -  height) / 2, 0, width, height);
 }

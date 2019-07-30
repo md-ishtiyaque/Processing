@@ -1,12 +1,16 @@
 int time=0, i=25, dir, temp, temp2;
 float angle, rbx, rby, bbx, bby;
 int[] j = new int[5];
-
+boolean isMousePressed = false;
 void setup()
 {
-  size(350,600);
-  frameRate(120);
+  size(displayWidth, displayHeight);
+  loop();
+  frameRate(30);
   background(0);
+  isMousePressed = false;
+  time=0;
+  i=25;
   for(temp=0;temp<3;temp++)
   {
     j[temp+1] = j[temp]-height/3; 
@@ -15,8 +19,16 @@ void setup()
 }
 void draw()
 { time++;
+  pushMatrix();
+  //translate(width / 2, height / 2);
+  scale(3.3);
   background_design();
   obstacles();
+  if(isMousePressed){
+    if(mouseX < width / 2) {angle=angle-7;}
+    else {angle=angle+7;}
+  }
+  popMatrix();
   //save("Duet.png");
 }
 void background_design()
@@ -46,10 +58,13 @@ void obstacles()
   obstacle2(1);
   obstacle1(2); 
 } 
-void keyPressed()
+void mousePressed()
 {
-  if(keyCode == LEFT) {angle=angle-7;}
-  if(keyCode == RIGHT) {angle=angle+7;}
+  isMousePressed = true;
+}
+void mouseReleased()
+{
+  isMousePressed = false;
 }
 void balls()
 {
@@ -81,7 +96,12 @@ void obstacle2(int k)
 void end()
 {   noLoop();
   noStroke();
-  fill(255);
+  fill(0);
   rect(0, 0, width, height);
-  println("GAME OVER!");
+  textMode(CENTER);
+  textSize(100);
+  text("GAME OVER!", width / 2, height / 2);
+  noLoop();
+  delay(10);
+  setup();
 }  

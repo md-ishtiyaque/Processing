@@ -13,7 +13,7 @@ void setup(){
   background(0);
   
   //time
-  time[0] = "           -";time[1] =  "  8:45-9:45";time[2] =  "  9:45-10:45";time[3] =  "11:00-12:00";
+  time[0] = "";time[1] =  "  8:45-9:45";time[2] =  " 9:45-10:45";time[3] =  "11:00-12:00";
   time[4] = "12:00-12:45";time[5] =  " 12:45-1:45";time[6] =  "  1:45-2:45";time[7] =  "  2:45-3:45";
   
   //Monday
@@ -60,6 +60,9 @@ void renderTable(){
 
 
 void renderText(){
+  textSize(map(width, 0, 2160, 0, 50)/1.25);
+  text("Ishtiyaque's", height / 50, height / 15.428);
+  text("app", height /12, height / 9);
   textSize(map(width, 0, 2160, 0, 50));
   for(int i = 0; i < 8; i++){
     text(time[i],      i * col, 0 * row + row/2 + 20);

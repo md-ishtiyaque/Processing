@@ -1,5 +1,5 @@
 void setup(){
-  size(1200, 600);
+  size(400, 400);
 }
 
 
@@ -7,7 +7,8 @@ void draw(){
   background(0);
   stroke(255);
   textSize(90);
-  text("MOHAMMED ISHTIYAQUE", 50, 340);
+  text("TIME", 80, 170);
+  text("TABLE", 60, 270);
   save("timeTable.jpg");
   noLoop();
 }
